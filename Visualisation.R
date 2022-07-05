@@ -1,0 +1,66 @@
+
+###################################################################################################
+###################################################################################################
+
+# Structural adjustment and infectious disease burden
+# Elias Nosrati
+
+###################################################################################################
+###################################################################################################
+
+# Clear environment and set working directory
+ls()
+rm(list = ls())
+setwd("")
+
+# Packages
+library(haven)
+library(stargazer)
+library(plm)
+library(lmtest)
+library(viridis)
+library(tidyverse)
+
+###################################################################################################
+###################################################################################################
+
+FD1 <- read_csv("FD_pro.csv")
+FD2 <- read_csv("FD_pri.csv")
+
+FD1$lag <- factor(FD1$lag, 
+	levels = c("1 year", "5 years", "10 years"))
+FD2$lag <- factor(FD2$lag, 
+	levels = c("1 year", "5 years", "10 years"))
+
+###################################################################################################
+
+# Plot
+g1 <- ggplot(FD1, aes(fd, fill = lag)) +
+		geom_density(adjust = 3, alpha = 0.8) +
+		scale_fill_viridis_d(option = "cividis") +
+		labs(
+			fill = "Time lag", 
+			x = "Excess deaths per 100,000 population caused by IMF programmes", 
+			y = "Density") +
+		scale_x_continuous(breaks = seq(-40, 220, 20)) +
+		theme_bw() +
+		theme(legend.position = "bottom")
+		
+g2 <- ggplot(FD2, aes(x = fd, fill = lag)) +
+		geom_density(adjust = 3, alpha = 0.7) +
+		scale_fill_viridis_d(option = "magma") +
+		labs(
+			fill = "Time lag", 
+			x = "Excess deaths per 100,000 population caused by IMF-mandated privatisation reforms", 
+			y = "Density") +
+		scale_x_continuous(breaks = seq(-40, 220, 20)) +
+		theme_bw() +
+		theme(legend.position = "bottom")
+
+g <- gridExtra::grid.arrange(g1, g2)
+
+setwd("/Users/Elias/Documents/Writings/Articles/IMF and infectious disease/Manuscript")
+ggsave("effects.jpg", g)
+
+###################################################################################################
+###################################################################################################

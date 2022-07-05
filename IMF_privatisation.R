@@ -31,7 +31,7 @@ names(data)
 ###################################################################################################
 ###################################################################################################
 
-# Baseline mortality model: lag 1
+# Baseline mortality model: lag 1 year
 FE <- plm(resp_deaths ~ lagBA2PRI +
 			factor(year) | . - lagBA2PRI + lagZPRI,
 		data = data, 
@@ -39,7 +39,7 @@ FE <- plm(resp_deaths ~ lagBA2PRI +
 		index = c("country", "year"))
 summary(FE, vcov = vcovSCC(FE, type = "HC3", cluster = "group"))
 
-# Baseline mortality model: lag 5
+# Baseline mortality model: lag 5 years
 FE <- plm(resp_deaths ~ lag5BA2PRI +
 			factor(year) | . - lag5BA2PRI + lag5ZPRI,
 		data = data, 
@@ -47,7 +47,7 @@ FE <- plm(resp_deaths ~ lag5BA2PRI +
 		index = c("country", "year"))
 summary(FE, vcov = vcovSCC(FE, type = "HC3", cluster = "group"))
 
-# Baseline mortality model: lag 10
+# Baseline mortality model: lag 10 years
 FE <- plm(resp_deaths ~ lag10BA2PRI +
 			factor(year) | . - lag10BA2PRI + lag10ZPRI,
 		data = data, 

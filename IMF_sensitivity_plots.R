@@ -24,7 +24,7 @@ library(tidyverse)
 ###################################################################################################
 ###################################################################################################
 
-# Sensitivity plot for all-cause mortality
+# Sensitivity plot for agggregate programme effect
 b <- 76	
 fun1 <- function(x) b / x
 
@@ -45,7 +45,7 @@ ggsave("sensit1.jpg", g1)
 ###################################################################################################
 ###################################################################################################
 
-# Sensitivity plot for all-cause DALYs
+# Sensitivity plot for privatisation effect
 b <- 95
 fun2 <- function(x) b / x
 

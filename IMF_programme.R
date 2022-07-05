@@ -32,7 +32,7 @@ stargazer(data.frame(data), summary.stat = c("n", "mean", "sd", "min", "max"), d
 ###################################################################################################
 ###################################################################################################
 
-# Baseline mortality model: lag 1
+# Baseline mortality model: lag 1 year
 FE <- plm(resp_deaths ~ lagIMFnn +
 			factor(year) | . - lagIMFnn + lagZPRO,
 		data = data, 
@@ -40,7 +40,7 @@ FE <- plm(resp_deaths ~ lagIMFnn +
 		index = c("country", "year"))
 summary(FE, vcov = vcovSCC(FE, type = "HC3", cluster = "group"))
 
-# Baseline mortality model: lag 5
+# Baseline mortality model: lag 5 years
 FE <- plm(resp_deaths ~ lag5IMFnn +
 			factor(year) | . - lag5IMFnn + lag5ZPRO,
 		data = data, 
@@ -48,7 +48,7 @@ FE <- plm(resp_deaths ~ lag5IMFnn +
 		index = c("country", "year"))
 summary(FE, vcov = vcovSCC(FE, type = "HC3", cluster = "group"))
 
-# Baseline mortality model: lag 10
+# Baseline mortality model: lag 10 years
 FE <- plm(resp_deaths ~ lag10IMFnn +
 			factor(year) | . - lag10IMFnn + lag10ZPRO,
 		data = data, 
